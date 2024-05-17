@@ -1,4 +1,4 @@
-module.exports = function(app, Topic, SubTopic) { 
+module.exports = function(app, Topic, SubTopic, Message) { 
 
     // Create a new subtopic
     app.post('/subtopic/create-subtopic', async function(req, res) {
@@ -29,6 +29,26 @@ module.exports = function(app, Topic, SubTopic) {
     // Get all subtopics for a topic
     app.get('/subtopic/get-subtopics/:id', async function(req, res) {
         const subTopics = await SubTopic.findAll({where: {topicId: req.params.id}});
+
+        //get all messages for each subtopic
+        for (let i = 0; i < subTopics.length; i++) {
+            const messages = await Message.findAll({where: {subTopicId: subTopics[i].id}});
+            subTopics[i].setDataValue('messages', messages.length);
+        }
+
+        res.send(subTopics);
+    });
+
+    // Get all subtopics
+    app.get('/subtopic/get-all-subtopics', async function(req, res) {
+        const subTopics = await SubTopic.findAll();
+
+        //get all messages for each subtopic
+        for (let i = 0; i < subTopics.length; i++) {
+            const messages = await Message.findAll({where: {subTopicId: subTopics[i].id}});
+            subTopics[i].setDataValue('messages', messages.length);
+        }
+
         res.send(subTopics);
     });
 }

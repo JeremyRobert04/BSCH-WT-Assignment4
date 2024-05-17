@@ -1,4 +1,4 @@
-module.exports = function(app, Topic) { 
+module.exports = function(app, Topic, SubTopic) { 
 
     // Create a Topic
     app.post('/topic/create-topic', async function(req, res) {
@@ -31,6 +31,13 @@ module.exports = function(app, Topic) {
     // Get all Topics
     app.get('/topic/get-all-topics', async function(req, res) {
         const topics = await Topic.findAll();
+
+        //get all subtopics for each topic
+        for (let i = 0; i < topics.length; i++) {
+            const subtopics = await SubTopic.findAll({where: {topicId: topics[i].id}});
+            topics[i].setDataValue('subtopics', subtopics.length);
+        }
+
         res.send(topics);
     });
 }
