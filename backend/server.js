@@ -33,7 +33,7 @@ require ('./routes/init')(User, bcrypt, passport, LocalStrategy)
 require ('./routes/user')(app, User, SubTopic, Message)
 require ('./routes/topic')(app, Topic, SubTopic)
 require ('./routes/subTopic')(app, Topic, SubTopic, Message)
-require ('./routes/message')(app, SubTopic, Message)
+require ('./routes/message')(app, User, SubTopic, Message)
 
 app.get('/', function(req, res) {
 
