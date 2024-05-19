@@ -99,8 +99,8 @@
       <input type="text" placeholder="Find a Subject" formControlName="searchValue"/>
     </form>
     <div *ngIf="searchForm.get('searchValue')?.value">
-      <div *ngFor="let subtopic of filteredSubtopics">
-        {{ subtopic.name }}
+      <div class="test" *ngFor="let subtopic of filteredSubtopics">
+        <a (click)="navigateToSubtopic(subtopic)">{{ subtopic.name }}</a>
       </div>
     </div>
     <svg

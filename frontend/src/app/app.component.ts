@@ -7,6 +7,7 @@ import { UserService } from './user/user.service';
 import { CommonModule } from '@angular/common';
 import { AppService } from './app-service.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs/operators';
 
 
@@ -27,7 +28,12 @@ export class AppComponent {
   searchValue = '';
   searchForm: FormGroup;
 
-  constructor(private userService: UserService, private appService: AppService, private fb: FormBuilder) {
+  constructor(
+    private userService: UserService, 
+    private appService: AppService, 
+    private fb: FormBuilder, 
+    private router: Router) {
+
     const user = this.userService.getUser();
 
     this.searchForm = this.fb.group({
@@ -84,10 +90,17 @@ export class AppComponent {
         subtopic.name.toLowerCase().includes(searchValue.toLowerCase())
       );
     }
+    console.log('Filtered subtopics: ', this.filteredSubtopics);
   }
 
   onSearchSubmit(): void {
     const searchValue = this.searchForm.get('searchValue')?.value ?? '';
     this.filterSubtopics(searchValue);
+  }
+
+  navigateToSubtopic(subtopic: any): void {
+    const categoryName = subtopic.topic;
+    const questionId = subtopic.id;
+    this.router.navigate(['/categories/category/question'], { queryParams: { categoryName, questionId } });
   }
 }
