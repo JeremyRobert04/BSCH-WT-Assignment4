@@ -47,6 +47,21 @@
   }
 }
 
+.sort-container {
+  text-align: end;
+  margin-bottom: 2rem;
+
+  label {
+    font-size: 1rem;
+    margin-right: 1rem;
+  }
+
+  select {
+    padding: 10px;
+    font-size: 1.2rem;
+  }
+}
+
 .reply-container {
   max-width: 100%;
   min-height: 200px;

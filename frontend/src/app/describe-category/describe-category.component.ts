@@ -31,6 +31,7 @@ export class DescribeCategoryComponent implements OnInit {
   categoryName: string | null = null;
   categoryId: string | null = null;
   topics: any[] = [];
+  sortedTopics: any[] = [];
   openForm: boolean = false;
   questionForm = new FormGroup({
     name: new FormControl(''),
@@ -57,6 +58,28 @@ export class DescribeCategoryComponent implements OnInit {
       });
   }
 
+  sortTopics(criteria: string) {
+    if (criteria === 'date-asc') {
+      this.sortedTopics = this.topics.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+    } else if (criteria === "date-desc") {
+      this.sortedTopics = this.topics.sort(
+        (a, b) =>
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      );
+    }
+    else if (criteria === 'answers') {
+      this.sortedTopics = this.topics.sort((a, b) => b.messages - a.messages);
+    }
+  }
+
+  onSortChange(event: Event) {
+    const sortValue = (event.target as HTMLSelectElement).value;
+    this.sortTopics(sortValue);
+  }
+
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       this.categoryName = params.get('name');
@@ -69,12 +92,14 @@ export class DescribeCategoryComponent implements OnInit {
 
     this.categoryService.getAllQuestions(this.categoryId ?? '-1').subscribe({
       next: (data) => {
-        console.log(data);
         this.topics = data;
+        this.sortedTopics = [...this.topics];
       },
       error: (error) => {
         console.error(error);
       },
     });
+
+    this.sortTopics('date');
   }
 }

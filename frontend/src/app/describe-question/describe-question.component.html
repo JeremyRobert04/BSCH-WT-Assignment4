@@ -11,7 +11,15 @@
 
   <div class="answers">
     <h3>{{ question.messages?.length }} Answers</h3>
-    @for (reply of question.messages; track reply.id) {
+    <div class="sort-container">
+      <label for="sorting">Sorted by:</label>
+      <select name="sorting-order" id="sorting" (change)="onSortChange($event)">
+        <option value="date-asc">Newest to Oldest Answers</option>
+        <option value="date-desc">Oldest to Newest Answers</option>
+        <option value="upvote" selected>Most Upvoted First</option>
+      </select>
+    </div>
+    @for (reply of sortedAnswers; track reply.id) {
     <div class="reply-container">
       <div class="reply-actions">
         <button class="btn-upvote" (click)="upvoteMessage(reply.id)">
@@ -84,6 +92,8 @@
     <button type="submit">Post Your Answer</button>
   </form>
   } @else {
-    <a href="/login" class="register-link underline-anim">Login to post a your comment.</a>
+  <a href="/login" class="register-link underline-anim"
+    >Login to post a your comment.</a
+  >
   }
 </div>
