@@ -2,7 +2,7 @@ var express = require("express");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 var session = require("express-session");
-var bcrypt = require("bcrypt");
+var bcrypt = require("bcryptjs");
 const cors = require("cors");
 const path = require("path");
 
