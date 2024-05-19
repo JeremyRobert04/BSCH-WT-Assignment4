@@ -57,4 +57,15 @@ module.exports = function(app, Topic, SubTopic, Message) {
 
         res.send(subTopics);
     });
+
+    // Get last three subtopics
+    app.get('/subtopic/get-last-three-subtopics', async function(req, res) {
+        const subTopics = await SubTopic.findAll();
+
+        const lastSubtopics = subTopics.slice(Math.max(subTopics.length - 3, 0));
+
+        lastSubtopics.sort((a, b) => b.createdAt - a.createdAt);
+
+        res.send(lastSubtopics);
+    });
 }
