@@ -2,118 +2,27 @@
   <h1 class="underline-anim">Categories:</h1>
 
   <div class="categories">
-    <a href="/categories/category?name=Funitures" class="card">
+    @for (category of categories; track category.id) {
+    <a
+      [href]="
+        '/categories/category?name=' +
+        category.name +
+        '&categoryId=' +
+        category.id
+      "
+      class="card"
+    >
       <div class="image-container">
-        <img src="/assets/Furniture-repair.jpg" alt="furnitures image" />
+        <img [src]="backendUrl + category.image" alt="category image" />
       </div>
       <div class="card-content">
-        <h3>Furnitures</h3>
+        <h3>{{ category.name }}</h3>
         <p class="description">
-          Got questions about home furnishings? Whether it's choosing the right
-          furniture, arranging your space, or maintenance tips, ask here! Get
-          advice from experts and enthusiasts to make your home unique and
-          comfortable.
+          {{ category.description }}
         </p>
-        <p class="question-count">1665627774882 questions</p>
+        <p class="question-count">{{ category.subtopics }} questions</p>
       </div>
     </a>
-
-    <a href="/categories/category?name=Paint" class="card">
-      <div class="image-container">
-        <img src="/assets/paint.jpg" alt="painting image" />
-      </div>
-      <div class="card-content">
-        <div>
-          <h3>Paint</h3>
-          <p class="description">
-            Need painting advice? From choosing colors to application
-            techniques, ask here! Get tips from experts to refresh your space
-            beautifully.
-          </p>
-        </div>
-        <p class="question-count">1665627774882 questions</p>
-      </div>
-    </a>
-
-    <a href="/categories/category?name=Garden" class="card">
-      <div class="image-container">
-        <img src="/assets/garden.jpg" alt="garden image" />
-      </div>
-      <div class="card-content">
-        <div>
-          <h3>Garden</h3>
-          <p class="description">
-            Questions about gardening? Find advice on plants, landscaping, and
-            maintenance from gardening enthusiasts and pros.
-          </p>
-        </div>
-        <p class="question-count">1665627774882 questions</p>
-      </div>
-    </a>
-
-    <a href="/categories/category?name=Wiring" class="card">
-      <div class="image-container">
-        <img src="/assets/electrical-repair.png" alt="electrical image" />
-      </div>
-      <div class="card-content">
-        <div>
-          <h3>Wiring & Domotics</h3>
-          <p class="description">
-            Curious about wiring or smart home tech? Get guidance on electrical
-            setups and home automation from knowledgeable sources.
-          </p>
-        </div>
-        <p class="question-count">1665627774882 questions</p>
-      </div>
-    </a>
-
-    <a href="/categories/category?name=Plumbing" class="card">
-      <div class="image-container">
-        <img src="/assets/plumbing.png" alt="plumbing image" />
-      </div>
-      <div class="card-content">
-        <div>
-          <h3>Bathroom & Plumbing</h3>
-          <p class="description">
-            Issues with your bathroom or plumbing? Seek help here for
-            installations, repairs, and maintenance tips from experienced
-            professionals.
-          </p>
-        </div>
-        <p class="question-count">1665627774882 questions</p>
-      </div>
-    </a>
-
-    <a href="/categories/category?name=Repairs" class="card">
-      <div class="image-container">
-        <img src="/assets/Repair-diy.jpg" alt="repair-diy image" />
-      </div>
-      <div class="card-content">
-        <div>
-          <h3>Repairs & DIY</h3>
-          <p class="description">
-            Got a repair or DIY project? Ask for advice and tips to tackle your
-            home improvement tasks with confidence.
-          </p>
-        </div>
-        <p class="question-count">1665627774882 questions</p>
-      </div>
-    </a>
-
-    <a href="/categories/category?name=Kitchen" class="card">
-      <div class="image-container">
-        <img src="/assets/kitchen-repair.jpg" alt="kitchen image" />
-      </div>
-      <div class="card-content">
-        <div>
-          <h3>Kitchen</h3>
-          <p class="description">
-            Need kitchen advice? Whether it's renovations, appliance choices, or
-            layout ideas, get expert tips to enhance your culinary space.
-          </p>
-        </div>
-        <p class="question-count">1665627774882 questions</p>
-      </div>
-    </a>
+    }
   </div>
 </div>

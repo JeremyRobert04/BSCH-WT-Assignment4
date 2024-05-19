@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="user-question">
+    <h3 class="topic-name">
+      {{ question.name }}
+    </h3>
+    <p class="message-body">{{ question.description }}</p>
+    <p class="topic-created-date">
+      Asked {{ question.createdAt | date : "MMM. d yyyy 'at' HH:mm" }}
+    </p>
+  </div>
+
+  <div class="answers">
+    <h3>{{ question.messages?.length }} Answers</h3>
+    @for (reply of question.messages; track reply.id) {
+    <div class="reply-container">
+      <div class="reply-actions">
+        <button class="btn-upvote" (click)="upvoteMessage(reply.id)">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.1"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="512"
+            height="512"
+            x="0"
+            y="0"
+            viewBox="0 0 24 24"
+            style="enable-background: new 0 0 512 512"
+            xml:space="preserve"
+            class="upvote-image"
+          >
+            <g>
+              <g fill="#000">
+                <path
+                  d="M12 22.75C6.07 22.75 1.25 17.93 1.25 12S6.07 1.25 12 1.25 22.75 6.07 22.75 12 17.93 22.75 12 22.75zm0-20C6.9 2.75 2.75 6.9 2.75 12S6.9 21.25 12 21.25s9.25-4.15 9.25-9.25S17.1 2.75 12 2.75z"
+                  fill="currentColor"
+                  opacity="1"
+                  data-original="#000000"
+                  class=""
+                ></path>
+                <path
+                  d="M10.74 16.28c-.19 0-.38-.07-.53-.22a.754.754 0 0 1 0-1.06l3-3-3-3a.754.754 0 0 1 0-1.06c.29-.29.77-.29 1.06 0l3.53 3.53c.29.29.29.77 0 1.06l-3.53 3.53c-.15.15-.34.22-.53.22z"
+                  fill="currentColor"
+                  opacity="1"
+                  data-original="#000000"
+                  class=""
+                ></path>
+              </g>
+            </g>
+          </svg>
+        </button>
+        <p class="nb-upvote">{{ reply.upVotes }}</p>
+      </div>
+
+      <div class="reply-content">
+        <div class="author-container">
+          <p class="author">
+            {{ reply.user.firstName + " " + reply.user.lastName }}
+          </p>
+          @if(reply.user.professional) {
+          <div class="pro-label">PRO</div>
+          }
+        </div>
+        <p class="reply-date">
+          Answered {{ reply.createdAt | date : "MMM. d yyyy 'at' HH:mm" }}
+        </p>
+
+        <p class="reply-content">
+          {{ reply.text }}
+        </p>
+      </div>
+    </div>
+    }
+  </div>
+
+  @if(user) {
+  <form class="post-comment" [formGroup]="answerForm" (submit)="submitAnswer()">
+    <label for="content">Your Answer</label>
+    <textarea
+      id="content"
+      name="content"
+      formControlName="text"
+      placeholder="Enter your comment here"
+    ></textarea>
+    <button type="submit">Post Your Answer</button>
+  </form>
+  } @else {
+    <a href="/login" class="register-link underline-anim">Login to post a your comment.</a>
+  }
+</div>

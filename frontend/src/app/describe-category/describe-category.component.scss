@@ -1,0 +1,140 @@
+@import "../../styles.scss";
+
+.container {
+  max-width: 100%;
+  margin: 3rem 15%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.display-create-topic-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  margin-bottom: 2rem;
+  padding: 15px 62px 15px 60px;
+
+  background-color: $orange-main-color;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  color: $grey-main-color;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 1.3rem;
+
+  cursor: pointer;
+
+  &:hover {
+    color: black;
+  }
+
+  svg {
+    width: 2rem;
+    height: auto;
+  }
+}
+
+.form-container {
+  margin-bottom: 5rem;
+  border-radius: 0.25rem;
+  border: 1px solid $grey-main-color;
+
+  padding: 15px;
+
+  display: flex;
+  flex-direction: column;
+  transition: height 2s;
+  overflow: hidden;
+
+  input, textarea {
+    max-width: calc(100% - 30px);
+    min-width: calc(100% - 30px);
+    padding: 15px;
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+  }
+
+  textarea {
+    min-height: 2rem;
+    height: auto;
+    max-height: calc(1.5em * 4);
+    overflow-y: hidden;
+
+    &:focus {
+      overflow-y: auto;
+    }
+  }
+
+  button {
+    align-self: center;
+    width: 50%;
+    text-align: center;
+    padding: 15px 62px 15px 60px;
+
+    background-color: $orange-main-color;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    color: $grey-main-color;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+}
+
+.questions-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.question-container {
+  max-width: 100%;
+  border: 2px solid $grey-main-color;
+  border-radius: 0.25rem;
+
+  padding: 15px 65px 15px 65px;
+
+  .question-title {
+    margin: 0.5rem 0 0 0;
+    color: $color-text-black;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      color: $orange-main-color;
+    }
+  }
+
+  .question-description {
+    margin: 10px 0 0 0;
+    font-size: 1.2rem;
+  }
+
+  .question-infos {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .response-count,
+  .created-at {
+    margin: 2rem 0 0 0;
+    font-size: 1rem;
+    align-self: flex-end;
+  }
+}

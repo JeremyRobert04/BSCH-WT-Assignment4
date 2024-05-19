@@ -21,7 +21,7 @@ export class AppComponent {
 
   constructor(private userService: UserService) {
     const user = this.userService.getUser();
-    
+
     if (user)
       this.isConnected = true;
   }

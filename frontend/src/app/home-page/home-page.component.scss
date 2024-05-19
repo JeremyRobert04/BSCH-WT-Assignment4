@@ -82,3 +82,48 @@ h1 {
     }
   }
 }
+
+.last-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .question-container {
+    max-width: 100%;
+    border: 2px solid $grey-main-color;
+    border-radius: 0.25rem;
+
+    padding: 15px 65px 15px 65px;
+
+    .question-title {
+      margin: 0.5rem 0 0 0;
+      color: $color-text-black;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      font-weight: 500;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        color: $orange-main-color;
+      }
+    }
+
+    .question-description {
+      margin: 10px 0 0 0;
+      font-size: 1.2rem;
+    }
+
+    .question-infos {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .response-count,
+    .created-at {
+      margin: 2rem 0 0 0;
+      font-size: 1rem;
+      align-self: flex-end;
+    }
+  }
+}

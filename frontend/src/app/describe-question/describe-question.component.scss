@@ -1,0 +1,167 @@
+@import "../../styles.scss";
+
+.container {
+  max-width: 100%;
+  margin: 3rem 15%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.user-question {
+  border-bottom: 1px solid $grey-main-color;
+
+  .topic-name {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .topic-description {
+    margin-top: 0.5rem;
+    font-size: 1.4rem;
+  }
+
+  .topic-created-date {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+  }
+
+  .message-body {
+    background-color: #6666660e;
+    border-radius: 0.25rem;
+
+    padding: 15px;
+
+    font-size: 1.5rem;
+  }
+}
+
+.answers {
+  h3 {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin-top: 2rem;
+  }
+}
+
+.reply-container {
+  max-width: 100%;
+  min-height: 200px;
+
+  border-bottom: 1px solid $grey-main-color;
+  display: flex;
+  margin-bottom: 3rem;
+
+  .reply-actions {
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 50px;
+
+    .btn-upvote {
+      width: fit-content;
+      height: fit-content;
+      padding: 0;
+      margin: 0;
+      outline: none;
+      border: none;
+      background: none;
+      cursor: pointer;
+
+      .upvote-image {
+        width: 50px;
+        height: auto;
+        transform: rotate(-90deg);
+      }
+    }
+
+    .nb-upvote {
+      font-size: 1.4rem;
+      margin: 0;
+    }
+  }
+
+  .reply-content {
+    max-width: 90%;
+    width: 100%;
+
+    .author-container {
+      display: flex;
+      align-items: center;
+
+      gap: 1rem;
+      margin-top: 3rem;
+
+      .author {
+        margin: 0;
+      }
+    }
+
+    .reply-date {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .reply-content {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+.post-comment {
+  display: flex;
+  flex-direction: column;
+
+  textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 15rem;
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    padding: 10px;
+  }
+
+  button {
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: fit-content;
+
+    margin-bottom: 2rem;
+    padding: 15px 62px 15px 60px;
+
+    background-color: $orange-main-color;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    color: $grey-main-color;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 1.3rem;
+
+    cursor: pointer;
+
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+.underline-anim::before {
+  background-color: $orange-main-color;
+}
+
+.register-link {
+  color: $grey-main-color;
+  font-size: 1.5rem;
+}
