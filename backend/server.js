@@ -48,11 +48,11 @@ require("./routes/subTopic")(app, User, Topic, SubTopic, Message);
 require("./routes/message")(app, User, SubTopic, Message);
 
 // host Angular app
-app.use(express.static(path.join(__dirname, "./frontend/browser")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./frontend/browser/index.html"));
-});
+//app.use(express.static(path.join(__dirname, "./frontend/browser")));
+//
+//app.get("*", (req, res) => {
+//  res.sendFile(path.join(__dirname, "./frontend/browser/index.html"));
+//});
 
 var server = app.listen(8080, function () {
   console.log("Backend Application listening at http://localhost:8080");
