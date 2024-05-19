@@ -18,6 +18,9 @@ export class DescribeQuestionComponent {
   questionId: string = '';
   user: any = null;
   question: any = {};
+  answers: any[] = [];
+  sortedAnswers: any[] = [];
+  sortValue: string = 'upvote';
 
   answerForm = new FormGroup({
     text: new FormControl(''),
@@ -25,6 +28,27 @@ export class DescribeQuestionComponent {
 
   constructor(private route: ActivatedRoute, private userService: UserService) {
     this.user = userService.getUser();
+  }
+
+  sortAnswers() {
+    if (this.sortValue === 'date-asc') {
+      this.sortedAnswers = this.answers.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+    } else if (this.sortValue === 'date-desc') {
+      this.sortedAnswers = this.answers.sort(
+        (a, b) =>
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      );
+    } else if (this.sortValue === 'upvote') {
+      this.sortedAnswers = this.answers.sort((a, b) => b.upVotes - a.upVotes);
+    }
+  }
+
+  onSortChange(event: Event) {
+    this.sortValue = (event.target as HTMLSelectElement).value;
+    this.sortAnswers();
   }
 
   submitAnswer(): void {
@@ -49,6 +73,9 @@ export class DescribeQuestionComponent {
     this.questionService.getAnswers(this.questionId).subscribe({
       next: (data) => {
         this.question = data;
+        this.answers = this.question.messages;
+        this.sortedAnswers = [...this.answers];
+        this.sortAnswers();
       },
       error: (error) => {
         console.error('An error occurred: ', error);
@@ -74,5 +101,16 @@ export class DescribeQuestionComponent {
     });
 
     this.getAnswers();
+  }
+
+  deleteAnswer(answerId: number): void {
+    this.questionService.deleteMessage(answerId).subscribe({
+      next: (data) => {
+        this.getAnswers();
+      },
+      error: (error) => {
+        console.error('Error while upvoting comment: ', error);
+      },
+    });
   }
 }

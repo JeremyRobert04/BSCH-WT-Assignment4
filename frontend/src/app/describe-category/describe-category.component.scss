@@ -94,6 +94,21 @@ h1 {
   }
 }
 
+.sort-container {
+  align-self: flex-end;
+  margin-bottom: 2rem;
+
+  label {
+    font-size: 1rem;
+    margin-right: 1rem;
+  }
+
+  select {
+    padding: 10px;
+    font-size: 1.2rem;
+  }
+}
+
 .questions-wrapper {
   display: flex;
   flex-direction: column;

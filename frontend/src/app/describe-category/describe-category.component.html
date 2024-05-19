@@ -93,8 +93,16 @@
     </form>
   </div>
 
+  <div class="sort-container">
+    <label for="sorting">Sorted by:</label>
+    <select name="sorting-order" id="sorting" (change)="onSortChange($event)">
+      <option value="date-asc">Newest to Oldest Question</option>
+      <option value="date-desc">Oldest to Newest Question</option>
+      <option value="answers">Number of Answers</option>
+    </select>
+  </div>
   <div class="questions-wrapper">
-    @for (topic of topics; track topic.id) {
+    @for (topic of sortedTopics; track topic.id) {
     <div class="question-container">
       <a
         class="question-title"
@@ -112,7 +120,9 @@
       </p>
       <div class="question-infos">
         <p class="response-count">{{ topic.messages }} answers</p>
-        <p class="created-at">Asked {{ topic.createdAt | date: 'MMM. d yyyy \'at\' HH:mm'}}</p>
+        <p class="created-at">
+          Asked {{ topic.createdAt | date : "MMM. d yyyy 'at' HH:mm" }}
+        </p>
       </div>
     </div>
     } @empty {
