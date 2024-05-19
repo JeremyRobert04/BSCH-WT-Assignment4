@@ -1,4 +1,5 @@
 <div class="main-page-layout">
+  @if(lastQuestions.length) {
   <h1 class="underline-anim">Last Questions:</h1>
   <div class="last-questions">
     @for (question of lastQuestions; track question.id) {
@@ -26,6 +27,7 @@
     </div>
     }
   </div>
+  }
 
   <h1 class="underline-anim">Browse Categories:</h1>
   <div class="categories">

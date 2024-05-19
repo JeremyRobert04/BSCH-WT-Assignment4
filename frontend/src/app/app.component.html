@@ -96,11 +96,28 @@
 
   <div class="search-bar">
     <form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()">
-      <input type="text" placeholder="Find a Subject" formControlName="searchValue"/>
+      <input
+        type="text"
+        placeholder="Find a Subject"
+        formControlName="searchValue"
+      />
     </form>
-    <div *ngIf="searchForm.get('searchValue')?.value">
-      <div class="test" *ngFor="let subtopic of filteredSubtopics">
-        <a (click)="navigateToSubtopic(subtopic)">{{ subtopic.name }}</a>
+    <div
+      *ngIf="searchForm.get('searchValue')?.value && filteredSubtopics.length"
+    >
+      <div class="test">
+        @for(subtopic of filteredSubtopics.slice(0, 4); track subtopic.id) {
+        <a
+          [href]="
+            '/categories/category/question?categoryName=' +
+            subtopic.topic +
+            '&questionId=' +
+            subtopic.id
+          "
+          class="underline-anim"
+          >{{ subtopic.name }}</a
+        >
+        }
       </div>
     </div>
     <svg

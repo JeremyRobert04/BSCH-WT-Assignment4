@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCircleChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from './user/user.service';
@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
 import { AppService } from './app-service.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { debounceTime } from 'rxjs/operators';
 
 
 @Component({
@@ -29,9 +28,9 @@ export class AppComponent {
   searchForm: FormGroup;
 
   constructor(
-    private userService: UserService, 
-    private appService: AppService, 
-    private fb: FormBuilder, 
+    private userService: UserService,
+    private appService: AppService,
+    private fb: FormBuilder,
     private router: Router) {
 
     const user = this.userService.getUser();
@@ -95,11 +94,5 @@ export class AppComponent {
   onSearchSubmit(): void {
     const searchValue = this.searchForm.get('searchValue')?.value ?? '';
     this.filterSubtopics(searchValue);
-  }
-
-  navigateToSubtopic(subtopic: any): void {
-    const categoryName = subtopic.topic;
-    const questionId = subtopic.id;
-    this.router.navigate(['/categories/category/question'], { queryParams: { categoryName, questionId } });
   }
 }
