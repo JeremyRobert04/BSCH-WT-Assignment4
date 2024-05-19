@@ -102,4 +102,15 @@ export class DescribeQuestionComponent {
 
     this.getAnswers();
   }
+
+  deleteAnswer(answerId: number): void {
+    this.questionService.deleteMessage(answerId).subscribe({
+      next: (data) => {
+        this.getAnswers();
+      },
+      error: (error) => {
+        console.error('Error while upvoting comment: ', error);
+      },
+    });
+  }
 }

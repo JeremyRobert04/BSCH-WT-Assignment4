@@ -31,4 +31,10 @@ export class QuestionService {
       {}
     );
   }
+
+  deleteMessage(answerId: number): Observable<any> {
+    return this.http.delete(
+      'http://localhost:8080/message/delete-message/' + answerId
+    );
+  }
 }
