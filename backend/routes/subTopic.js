@@ -36,6 +36,9 @@ module.exports = function(app, Topic, SubTopic, Message) {
             subTopics[i].setDataValue('messages', messages.length);
         }
 
+        //sort subtopics by creation date
+        subTopics.sort((a, b) => b.createdAt - a.createdAt);
+
         res.send(subTopics);
     });
 
@@ -48,6 +51,9 @@ module.exports = function(app, Topic, SubTopic, Message) {
             const messages = await Message.findAll({where: {subTopicId: subTopics[i].id}});
             subTopics[i].setDataValue('messages', messages.length);
         }
+
+        //sort subtopics by creation date
+        subTopics.sort((a, b) => b.createdAt - a.createdAt);
 
         res.send(subTopics);
     });
