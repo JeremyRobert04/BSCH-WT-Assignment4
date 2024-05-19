@@ -1,0 +1,99 @@
+@import "../../styles.scss";
+.main-page-layout {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  
+    max-width: 100%;
+    margin: 3rem 20rem;
+}
+
+.underline-anim {
+    cursor: default;
+  
+    &::before {
+      background-color: $orange-main-color;
+    }
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.register-box {
+    padding: 2rem;
+    border-radius: 0.5rem;
+    background-color: $color-background-white;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.underTitleText {
+    font-size: 1rem;
+    margin-top: 0rem;
+}
+
+.underTitleText a {
+    position: relative;
+    text-decoration: none;
+    color: $orange-main-color;
+    cursor: pointer;
+    transition: color 0.3s;
+  
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: $orange-main-color;
+      visibility: hidden;
+      transform: scaleX(0);
+      transition: all 0.3s ease-in-out;
+    }
+  
+    &:hover::before {
+      visibility: visible;
+      transform: scaleX(1);
+    }
+}
+
+.register-box input {
+    width: 50%;
+    height: 2rem;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: 1px solid $orange-main-color;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.register-box button {
+    width: 25%;
+    height: 2rem;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: $orange-main-color;
+    color: $color-background-white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 2rem;
+
+    &:hover {
+        background-color: darken($orange-main-color, 10%);
+    }
+
+    &:active {
+        background-color: darken($orange-main-color, 20%);
+    }
+}
+

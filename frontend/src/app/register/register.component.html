@@ -1,1 +1,25 @@
-<p>register works!</p>
+<div class="main-page-layout">
+    <br>
+
+    <div class="register-box">
+        <h1 class="underline-anim">Sign in</h1>
+        <p class="underTitleText">Already have an SOS Home account ? Log in  
+            <a href="/login" class="">here!</a>
+        </p>
+
+        <input type="text" #FirstnameInput class="input-box" placeholder="Firstname" name="Firstame" required>
+
+        <input type="text" #SurnameInput class="input-box" placeholder="Surname" name="Surname" required>
+
+        <input type="text" #emailInput class="input-box" placeholder="Email" name="email" required>
+
+        <input type="password" #passwordInput class="input-box" placeholder="Password" name="password1" required>
+
+        <input type="password" #passwordInput2 class="input-box" placeholder="Re-enter Password" name="password2" required>
+
+        <button class="register-button" (click)="userRegister(FirstnameInput.value, SurnameInput.value, emailInput.value, passwordInput.value, passwordInput2.value)">Register</button>
+
+    </div>
+
+
+</div>

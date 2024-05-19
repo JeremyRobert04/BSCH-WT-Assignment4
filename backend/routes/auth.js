@@ -39,7 +39,7 @@ module.exports = function(app, User, bcrypt, passport) {
                 if (err) {
                     return res.status(500).json({ message: 'Login failed' });
                 }
-                return res.json({ message: 'Logged in successfully' });
+                return res.json({ message: 'Logged in successfully', user });
             });
         })(req, res, next);
     });

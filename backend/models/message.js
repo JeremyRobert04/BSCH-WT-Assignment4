@@ -33,6 +33,11 @@ const Message = sequelize.define('Message', {
         },
         allowNull: false, // Ensure each Message has a SubTopic
     },
+    upVotes: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
 });
 
 User.hasMany(Message, { foreignKey: 'userId', onDelete: 'CASCADE' }); // A User can have many Messages

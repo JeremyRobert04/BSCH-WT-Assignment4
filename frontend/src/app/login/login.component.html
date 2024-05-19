@@ -1,1 +1,19 @@
-<p>login works!</p>
+<div class="main-page-layout">
+    <br>
+
+    <div class="login-box">
+        <h1 class="underline-anim">Log In</h1>
+        <p class="underTitleText">New to SOS Home ? Create an account  
+            <a href="/register" class="">here!</a>
+        </p>
+
+        <input type="text" #emailInput class="input-box" placeholder="Email" name="email" required>
+
+        <input type="password" #passwordInput class="input-box" placeholder="Password" name="password" required>
+
+        <button class="login-button" (click)="userLogin(emailInput.value, passwordInput.value)">Log In</button>
+
+    </div>
+
+
+</div>

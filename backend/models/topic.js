@@ -20,7 +20,12 @@ const Topic = sequelize.define('Topic', {
     description: {
         type: DataTypes.TEXT,
         allowNull: false
-    }
+    },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+
     }, {
 });
 
