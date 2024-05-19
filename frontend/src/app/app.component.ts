@@ -90,7 +90,6 @@ export class AppComponent {
         subtopic.name.toLowerCase().includes(searchValue.toLowerCase())
       );
     }
-    console.log('Filtered subtopics: ', this.filteredSubtopics);
   }
 
   onSearchSubmit(): void {
