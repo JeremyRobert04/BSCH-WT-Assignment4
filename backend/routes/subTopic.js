@@ -49,7 +49,9 @@ module.exports = function(app, User, Topic, SubTopic, Message) {
         //get all messages for each subtopic
         for (let i = 0; i < subTopics.length; i++) {
             const messages = await Message.findAll({where: {subTopicId: subTopics[i].id}});
+            const topic = await Topic.findByPk(subTopics[i].topicId);
             subTopics[i].setDataValue('messages', messages.length);
+            subTopics[i].setDataValue('topic', topic.name);
         }
 
         //sort subtopics by creation date
