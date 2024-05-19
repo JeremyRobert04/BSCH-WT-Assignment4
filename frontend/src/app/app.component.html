@@ -107,9 +107,16 @@
     >
       <div class="test">
         @for(subtopic of filteredSubtopics.slice(0, 4); track subtopic.id) {
-        <a (click)="navigateToSubtopic(subtopic)" class="underline-anim">{{
-          subtopic.name
-        }}</a>
+        <a
+          [href]="
+            '/categories/category/question?categoryName=' +
+            subtopic.topic +
+            '&questionId=' +
+            subtopic.id
+          "
+          class="underline-anim"
+          >{{ subtopic.name }}</a
+        >
         }
       </div>
     </div>

@@ -51,6 +51,7 @@ export class DescribeCategoryComponent implements OnInit {
         next: (data) => {
           this.openForm = false;
           this.questionForm.reset();
+          this.fetchTopics();
         },
         error: (error) => {
           console.error(error);
@@ -80,16 +81,7 @@ export class DescribeCategoryComponent implements OnInit {
     this.sortTopics(sortValue);
   }
 
-  ngOnInit(): void {
-    this.route.queryParamMap.subscribe((params) => {
-      this.categoryName = params.get('name');
-      this.categoryId = params.get('categoryId');
-      if (!this.categoryName || !this.categoryId) {
-        this.router.navigate(['/categories']);
-        return;
-      }
-    });
-
+  fetchTopics(): void {
     this.categoryService.getAllQuestions(this.categoryId ?? '-1').subscribe({
       next: (data) => {
         this.topics = data;
@@ -101,5 +93,17 @@ export class DescribeCategoryComponent implements OnInit {
     });
 
     this.sortTopics('date');
+  }
+
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe((params) => {
+      this.categoryName = params.get('name');
+      this.categoryId = params.get('categoryId');
+      if (!this.categoryName || !this.categoryId) {
+        this.router.navigate(['/categories']);
+        return;
+      }
+    });
+    this.fetchTopics();
   }
 }

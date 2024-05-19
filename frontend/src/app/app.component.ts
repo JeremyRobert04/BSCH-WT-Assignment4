@@ -95,10 +95,4 @@ export class AppComponent {
     const searchValue = this.searchForm.get('searchValue')?.value ?? '';
     this.filterSubtopics(searchValue);
   }
-
-  navigateToSubtopic(subtopic: any): void {
-    const categoryName = subtopic.topic;
-    const questionId = subtopic.id;
-    this.router.navigate(['/categories/category/question'], { queryParams: { categoryName, questionId } });
-  }
 }
