@@ -4,6 +4,7 @@ const LocalStrategy = require("passport-local").Strategy;
 var session = require('express-session');
 var bcrypt = require('bcrypt');
 const cors = require('cors');
+const path = require('path');
 
 
 const User = require('./models/user');
@@ -32,18 +33,24 @@ require ('./routes/auth')(app, User, bcrypt, passport)
 require ('./routes/init')(User, bcrypt, passport, LocalStrategy)
 require ('./routes/user')(app, User, SubTopic, Message)
 require ('./routes/topic')(app, Topic, SubTopic)
-require ('./routes/subTopic')(app, Topic, SubTopic, Message)
+require ('./routes/subTopic')(app, User, Topic, SubTopic, Message)
 require ('./routes/message')(app, User, SubTopic, Message)
 
-app.get('/', function(req, res) {
-
-    res.send('Hello World');
-})
+//app.get('/', function(req, res) {
+//
+//    res.send('Hello World');
+//})
 
 app.get('/ping', function(req, res) {
     res.send('pong');
 })
 
+// host Angular app
+app.use(express.static(path.join(__dirname, './frontend/browser')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './frontend/browser/index.html'));
+});
 
 var server = app.listen(8080, function() {
     console.log("Backend Application listening at http://localhost:8080")
