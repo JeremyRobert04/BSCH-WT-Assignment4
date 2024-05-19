@@ -95,7 +95,14 @@
   </div>
 
   <div class="search-bar">
-    <input type="text" placeholder="Find a Subject" />
+    <form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()">
+      <input type="text" placeholder="Find a Subject" formControlName="searchValue"/>
+    </form>
+    <div *ngIf="searchForm.get('searchValue')?.value">
+      <div *ngFor="let subtopic of filteredSubtopics">
+        {{ subtopic.name }}
+      </div>
+    </div>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"

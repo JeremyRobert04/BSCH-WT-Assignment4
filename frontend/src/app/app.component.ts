@@ -5,11 +5,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCircleChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from './user/user.service';
 import { CommonModule } from '@angular/common';
+import { AppService } from './app-service.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatSidenavModule, FontAwesomeModule, CommonModule],
+  imports: [RouterOutlet, MatSidenavModule, FontAwesomeModule, CommonModule, ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -18,12 +22,28 @@ export class AppComponent {
   opened = false;
   faCircleChevronRight = faCircleChevronRight;;
   isConnected = false;
+  subtopics: any[] = [];
+  filteredSubtopics: any[] = [];
+  searchValue = '';
+  searchForm: FormGroup;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private appService: AppService, private fb: FormBuilder) {
     const user = this.userService.getUser();
+
+    this.searchForm = this.fb.group({
+      searchValue: [''],
+    });
 
     if (user)
       this.isConnected = true;
+  }
+
+  ngOnInit(): void {
+    this.fetchData();
+    this.searchForm.get('searchValue')?.valueChanges
+      .subscribe((value) => {
+        this.filterSubtopics(value);
+      });
   }
 
   public hamburgerAnimation(event: MouseEvent): void {
@@ -42,5 +62,32 @@ export class AppComponent {
   logout(): void {
     this.userService.clearUser();
     this.isConnected = false;
+  }
+
+  fetchData(): void {
+    this.appService.getAllSubtopics().subscribe({
+      next: (data) => {
+        this.subtopics = data;
+        this.filterSubtopics(this.searchForm.get('searchValue')?.value);
+      },
+      error: (error) => {
+        console.error('Error occurred: ', error);
+      },
+    });
+  }
+
+  filterSubtopics(searchValue: string): void {
+    if (!searchValue) {
+      this.filteredSubtopics = this.subtopics;
+    } else {
+      this.filteredSubtopics = this.subtopics.filter(subtopic =>
+        subtopic.name.toLowerCase().includes(searchValue.toLowerCase())
+      );
+    }
+  }
+
+  onSearchSubmit(): void {
+    const searchValue = this.searchForm.get('searchValue')?.value ?? '';
+    this.filterSubtopics(searchValue);
   }
 }
