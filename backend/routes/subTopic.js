@@ -88,6 +88,7 @@ module.exports = function(app, User, Topic, SubTopic, Message) {
             for (let i = 0; i < messages.length; i++) {
                 const user = await User.findByPk(messages[i].userId);
                 messages[i].setDataValue('user', user);
+                messages[i].setDataValue('subTopic', subTopic);
             }
 
             res.send(messages);
