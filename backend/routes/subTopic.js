@@ -64,6 +64,13 @@ module.exports = function(app, User, Topic, SubTopic, Message) {
 
         const lastSubtopics = subTopics.slice(Math.max(subTopics.length - 3, 0));
 
+        for (let i = 0; i < lastSubtopics.length; i++) {
+            const topic = await Topic.findByPk(lastSubtopics[i].topicId);
+            lastSubtopics[i].setDataValue('topic', topic.name);
+            const messages = await Message.findAll({where: {subTopicId: lastSubtopics[i].id}});
+            lastSubtopics[i].setDataValue('messages', messages.length);
+        }
+
         lastSubtopics.sort((a, b) => b.createdAt - a.createdAt);
 
         res.send(lastSubtopics);
